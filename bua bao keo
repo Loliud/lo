@@ -1,0 +1,105 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+void menu()
+{
+printf("====================TRO CHOI BUA - BAO - KEO================\n\n");
+printf("\nchon 1: Ban chon BUA");
+printf("\nchon 2: Ban chon BAO");
+printf("\nchon 3: Ban chon KEO");
+printf("\nchon 0: Thoat khoi tro choi\n");
+printf("============================================================\n\n");
+}
+int may_chon(int a, int b)
+{
+   return a + rand()%(b-a+1);
+}
+int main()
+{
+int diem = 0;
+int nguoichon;
+int maychon;
+while(nguoichon != 0)
+{
+menu();
+srand(time(NULL));
+maychon = may_chon(1, 3);
+scanf("%d", &nguoichon);
+if(nguoichon == 0)
+{
+printf("Ban da thoat khoi chuong trinh\n");
+return 0;
+}
+if(nguoichon == 1)
+{
+printf("Ban da chon Bua\n");
+if(maychon == 1)
+{
+printf("May da chon Bua\n");
+printf("Ban hoa\n");
+}
+else if(maychon == 2)
+{
+printf("May chon Bao\n");
+printf("Ban thua\n");
+printf("Diem cua ban la : %d\n", diem);
+diem = 0;
+}
+else if(maychon == 3)
+{
+printf("May chon Keo\n");
+printf("Ban thang\n");
+diem = diem + 1;
+}
+}
+ else if(nguoichon == 2)
+{
+printf("Ban chon BAO\n");
+if(maychon == 1)
+{
+printf("May chon Bua\n");
+printf("Ban thang\n");
+diem = diem + 1;
+}
+if(maychon == 2)
+{
+printf("May chon Bao\n");
+printf("Ban hoa\n");
+}
+if(maychon == 3)
+{
+printf("May chon Keo\n");
+printf("Ban thua\n");
+printf("Diem cua ban la : %d\n", diem);
+diem = 0;
+}
+}
+else if(nguoichon == 3)
+{
+printf("Ban chon Keo\n");
+if(maychon == 1)
+{
+printf("May chon Bua\n");
+printf("Ban thua\n");
+printf("Diem cua ban la: %d\n", diem);
+diem = 0;
+}
+else if(maychon == 2)
+{
+printf("May chon Bao\n");
+printf("Ban thang\n");
+diem = diem + 1;
+}
+else if(maychon == 3)
+{
+printf("May chon Keo\n");
+printf("Ban hoa\n");
+}
+}
+if(nguoichon != 0 && nguoichon != 1 && nguoichon != 2 && nguoichon != 3)
+{
+printf("Ban hay chon lai\n");
+}
+}
+return 0;
+}
