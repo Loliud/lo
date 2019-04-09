@@ -1,0 +1,60 @@
+#include<stdio.h>
+void nhap_mang(int a[])
+{
+for(int i = 0; i < 10; i++)
+{
+scanf("%d", &a[i]);
+}
+}
+void sap_xep(int a[])
+{
+for(int i = 0; i < 9;i++)
+{
+for(int j = i + 1; j < 10; j++)
+{
+if(a[i] < a[j])
+{
+int x;
+x = a[i];
+a[i] = a[j];
+a[j] = x;
+}
+}
+}
+}
+void sap_xep_le(int a[])
+{
+for(int i = 0; i < 9;i++)
+{
+for(int j = i + 1; j < 10; j++)
+{
+if(a[i] < a[j] && a[i] % 2 != 0 && a[j] % 2 != 0)
+{
+int x;
+x = a[i];
+a[i] = a[j];
+a[j] = x;
+}
+}
+}
+}
+void xuat_mang(int a[])
+{
+for(int i = 0; i < 10; i++)
+{
+printf("%d ", a[i]);
+}
+}
+int main()
+{
+int a[10];
+printf("\nHay nhap cac phan tu trong mang:\n");
+nhap_mang(a);
+sap_xep_le(a);
+printf("\nMang sap xep cac so le trong mang giam dan la :");
+xuat_mang(a);
+sap_xep(a);
+printf("\nMang sap xep cac so nguyen giam dan la \t\t:");
+xuat_mang(a);
+return 0;
+}
