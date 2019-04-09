@@ -1,0 +1,32 @@
+#include<stdio.h>
+void nhap_mang(int a[], int b[])
+{
+for(int i = 0; i < 10; i++)
+{
+printf("\nHay nhap gia tri a[%d]: ", i);
+scanf("%d", &a[i]);
+}
+for(int i = 0; i < 10; i++)
+{
+printf("\nHay nhap gia tri b[%d]: ", i);
+scanf("%d", &b[i]);
+}
+}
+int kiem_tra(int a[], int b[])
+{
+for(int i = 0; i < 10; i++)
+{
+if(a[i] != b[i])
+{
+return 0;
+}
+}
+return 1;
+}
+int main()
+{
+int a[10], b[10];
+nhap_mang(a, b);
+printf("%d", kiem_tra(a, b));
+return 0;
+}
