@@ -1,0 +1,30 @@
+#include<stdio.h>
+void isLeapYear(int n)
+{
+ if(n % 4 != 0){printf("\nThis is not LeapYear");}
+else if(n % 1000 == 0 || n % 100 == 0)
+{
+if(n % 100 == 0 && n % 400 == 0)
+{
+printf("\nThis is LeapYear");
+}
+else
+{printf("\nThis is not LeapYear");}
+}
+ else if(n % 4 == 0)
+{
+printf("\nThis is LeapYear");
+}
+}
+int main()
+{
+int n;
+do{
+printf("\nHay nhap vao 1 nam :");
+scanf("%d", &n);
+if(n < 0)
+{printf("\nVui long nhap lai");}
+}while(n < 0);
+isLeapYear(n);
+return 0;
+}
