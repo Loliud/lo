@@ -1,0 +1,40 @@
+#include<stdio.h>
+void getJudgeData(float a[5])
+{
+for(int i = 0; i < 5; i++)
+{do{
+printf("\nHay nhap diem cua giam khao thu %d:", i + 1);
+scanf("%f", &a[i]);
+if(a[i] > 10 || a[i] < 0)
+{
+printf("\nDiem tu 0 - 10. Ban hay nhap lai.");
+}
+}while(a[i] > 10 || a[i] < 0);
+}
+for(int i = 0; i < 4; i++)
+{
+for(int j = i + 1; j < 5; j++)
+{
+if(a[i] > a[j])
+{
+int x;
+x = a[i];
+a[i] = a[j];
+a[j] = a[i];
+}
+}
+}
+}
+void calcScore(float a[5])
+{
+float diem;
+diem = (a[1] + a[2] + a[3]) / 3;
+printf("\nDiem cua thi sinh la : %f", diem);
+}
+int main()
+{
+float a[5];
+getJudgeData(a);
+calcScore(a);
+return 0;
+}
