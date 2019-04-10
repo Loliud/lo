@@ -1,0 +1,50 @@
+#include<stdio.h>
+void nhap_mang(int a[][3])
+{
+for(int i = 0; i < 3; i++)
+{
+for(int j = 0; j < 3; j++)
+{
+scanf("%d", &a[i][j]);
+}
+}
+}
+void xuat_mang(int a[][3])
+{
+for(int i = 0; i < 3; i++)
+{
+for(int j = 0; j < 3; j++)
+{
+printf("%d ", a[i][j]);
+}
+printf("\n");
+}
+}
+void tich_mang(int a[][3], int b[][3], int c[][3])
+{
+for(int i = 0; i < 3; i++)
+{
+for(int j = 0; j < 3; j++)
+{
+c[i][j] = a[i][j] * b[i][j];
+}
+}
+}
+int main()
+{
+int a[3][3], b[3][3];
+int c[3][3];
+printf("\nHay nhap mang a:\n");
+nhap_mang(a);
+printf("\nHay nhao mang b:\n");
+nhap_mang(b);
+printf("\nXuat mang a:\n");
+xuat_mang(a);
+printf("\nXuat mang b:\n");
+xuat_mang(b);
+// nhan 2 mang a va b
+tich_mang(a, b, c);
+printf("\nXuat mang c:\n");
+xuat_mang(c);
+return 0;
+}
