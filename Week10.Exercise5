@@ -1,0 +1,66 @@
+#include<stdio.h>
+void nhap_mang(int a[])
+{
+for(int i = 0; i < 10; i++)
+{
+scanf("%d", &a[i]);
+}
+}
+void dem_phan_tu_0(int a[])
+{
+int dem = 0;
+for(int i = 0; i < 10; i++)
+{
+if(a[i] == 0) dem = dem + 1;
+}
+printf("\nSo phan tu so 0 la : %d", dem);
+}
+void chieu_dai_chuoi_con(int a[])
+{
+int chieu_dai = 0;
+int so_chuoi = 0;
+for(int i = 0; i < 10; i++)
+{
+if(a[i] == 0)
+{
+so_chuoi = so_chuoi + 1;
+do{
+chieu_dai = chieu_dai + 1;
+i = i + 1;
+if(a[i] != 0)
+{
+printf("\nChieu dai chuoi con thu %d la : %d", so_chuoi, chieu_dai);
+chieu_dai = 0;
+}
+}while(a[i] == 0);
+}
+}
+}
+void so_lan_xuat_hien_cac_so(int a[], int b[])
+{
+for(int i = 0; i < 100; i++){ b[i] = 0;}
+for(int i = 0; i < 10; i++)
+{
+b[a[i]]++;
+}
+for(int i = 0; i < 100; i++)
+{if(b[i] > 0)
+{
+printf("\nSo %d xuat hien %d lan.", i, b[i]);
+}
+}
+}
+int main()
+{
+int a[10];
+//int b[1000];
+printf("\nHay nhap cac phan tu cua mang:\n");
+nhap_mang(a);
+dem_phan_tu_0(a);
+chieu_dai_chuoi_con(a);
+
+// tim so lan xuat hien cac phan tu trong mang
+int b[100];
+so_lan_xuat_hien_cac_so(a, b);
+return 0;
+}
