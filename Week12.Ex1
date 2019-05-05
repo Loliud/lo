@@ -1,0 +1,17 @@
+#include<stdio.h>
+
+int main(){
+	
+	int a, b, c;
+	scanf("%d%d%d", &a, &b, &c);
+	printf("%d %d %d\n", a, b, c);
+
+	int *poiter;
+	poiter = &a;
+	poiter = &b;
+	poiter = &c;	
+	printf("%d\n", *poiter);
+	*poiter = 10;
+	printf("%d%d%d\n", a, b, c);
+	return 0;
+}
