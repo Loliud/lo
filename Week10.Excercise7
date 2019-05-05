@@ -1,0 +1,33 @@
+#include<stdio.h>
+#define max 1000
+void nhap_mang(int a[], int n){
+	for(int i = 0 ; i < n ; i++){
+		scanf("%d", &a[i]);
+	}
+}
+void xuat_mang(int a[], int n){
+	for(int i = 0 ; i < n ; i++){
+		printf("%d ", a[i]);
+	}
+	printf("\n");
+}
+int kiem_tra_doi_xung(int a[], int n){
+	int kiem_tra = 1;
+	for(int i = 0; i < n / 2 ; i++){
+		if(a[i] != a[n - i - 1]){
+			kiem_tra = 0;
+		}
+	}
+	return kiem_tra;
+}
+int main(){
+	int a[max];
+	int n;
+	printf("Hay nhap so phan tu trong mang:\n");
+	scanf("%d", &n);
+	nhap_mang(a, n);
+	printf("PHAN TU CUA MANG LA:\n");
+	xuat_mang(a, n);
+	printf("%d\n", kiem_tra_doi_xung(a, n));
+	return 0;
+}
