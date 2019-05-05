@@ -1,0 +1,34 @@
+#include<stdio.h>
+#define max 1000
+void nhap_mang(float a[], int n){
+	for(int i = 0 ; i < n ; i++){
+		scanf("%f", &a[i]);
+	}
+}
+void xuat_mang(float a[], int n){
+	for(int i = 0 ; i < n ; i++){
+		printf("%f ", a[i]);
+	}
+	printf("\n");
+}
+void dao_mang(float a[], int n){
+	for(int i = 0 ; i < n / 2; i++){
+		float c;
+		c = a[i];
+		a[i] = a[n - i - 1];
+		a[n - i - 1] = c;
+	}
+}
+int main(){
+	float a[max];
+	int n;
+	printf("Hay nhap so phan tu trong mang:\n");
+	scanf("%d", &n);
+	nhap_mang(a, n);
+	printf("PHAN TU CUA MANG LA:\n");
+	xuat_mang(a, n);
+	dao_mang(a, n);
+	printf("Mang sau khi da dao la:\n");
+	xuat_mang(a, n);
+	return 0;
+}
