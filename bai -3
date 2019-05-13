@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<string.h>
+#define max 1000
+int main(){
+
+int array[max];
+int n;
+printf("\nHay nhap so luong phan tu mang:");
+scanf("%d", &n);
+printf("\nHay nhap cac phan tu cua mang:\n");
+
+for(int i =0; i < n; i++){
+    scanf("%d", &array[i]);
+}
+
+for(int i = 0;i < n; i++){
+    if(array[i] > 2016){
+        printf("\nPhan tu dau tien cua mang lon hon 2016 la: %d", array[i]);
+        return 0;
+    }
+
+}
+
+return 0;
+}
+
+
