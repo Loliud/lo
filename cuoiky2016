@@ -1,0 +1,177 @@
+#include<stdio.h>
+#include<string.h>
+void menu(){
+    printf("\n1. Nhap thong tin nha hang.");
+    printf("\n2. In thong tin.");
+    printf("\n3. Tim kiem theo ten.");
+    printf("\n4. Tim kiem theo mo ta.");
+    printf("\n5. Sap xep.");
+    printf("\n6. Thoat chuong trinh.");
+}
+struct nhahang{
+    char name[30];
+    char description[500];
+    float rate;
+    char address[100];
+};
+typedef struct nhahang NhaHang;
+
+void nhap_thong_tin(NhaHang lists[], int *count, int n){
+    for(int i= 0; i < n; i++){
+        printf("\nNhap thong tin: \n");
+        while(getchar() != '\n');
+        printf("Name: ");
+        do{
+            if(strlen(lists[*count].name) > 30){
+                printf("\nKhong duoc qua 30 ky tu. Hay nhap lai : ");
+            }
+            gets(lists[*count].name);
+
+        }while(strlen(lists[*count].name) > 30);
+         printf("Description: ");
+        do{
+            if(strlen(lists[*count].description) > 30){
+                printf("\nKhong duoc qua 30 ky tu. Hay nhap lai : ");
+            }
+            gets(lists[*count].description);
+
+        }while(strlen(lists[*count].description) > 30);
+        printf("Rate: ");
+        do{
+            if(lists[*count].rate > 5 || lists[*count].rate < 0){
+                printf("\nRate trong khoang 0-5. Hay nhap lai : ");
+            }
+            scanf("%f", &lists[*count].rate);
+            fflush(stdin);
+
+        }while(lists[*count].rate > 5 || lists[*count].rate < 0);
+        printf("Address: ");
+        do{
+            if(strlen(lists[*count].address) > 10){
+                printf("\nKhong duoc qua 10 ky tu. Hay nhap lai : ");
+            }
+            gets(lists[*count].address);
+
+        }while(strlen(lists[*count].address) > 10);
+        *count += 1;
+    }
+}
+
+void in_thong_tin(NhaHang lists[], int count){
+    for(int i = 0; i < count; i++){
+        printf("\nNha hang so %d", i + 1);
+        printf("\nName: %s", lists[i].name);
+        printf("\nDescription: %s", lists[i].description);
+        printf("\nRate: %.1f", lists[i].rate);
+        printf("\nAddress: %s", lists[i].address);
+
+    }
+}
+void tim_kiem_theo_ten(NhaHang lists[], int count){
+    printf("\nHay nhap ten nha hang ban muon tim: ");
+    char name[30];
+    int key = 0;
+    fflush(stdin);
+    gets(name);
+    for(int i = 0; i < count; i++){
+        if(strcasecmp(name, lists[i].name) == 0){
+            key += 1;
+            printf("\n================================\n");
+            printf("\nName: %s", lists[i].name);
+            printf("\nDescription: %s", lists[i].description);
+            printf("\nRate: %.1f", lists[i].rate);
+            printf("\nAddress: %s", lists[i].address);
+            printf("\n================================\n");
+        }
+    }
+    if(key == 0){
+        printf("\nKhong tim thay nha hang.");
+    }
+}
+void tim_kiem_theo_mo_ta(NhaHang lists[], int count){
+    char mo_ta[30];
+    int key = 0;
+    printf("\bHay nhap mo ta cua ban: ");
+    fflush(stdin);
+    gets(mo_ta);
+
+    for(int i = 0; i < count; i++){
+        char *x  = strstr(lists[i].description, mo_ta);
+        if(strlen(x) > 0){
+            key += 1;
+            printf("\n================================\n");
+            printf("\nName: %s", lists[i].name);
+            printf("\nDescription: %s", lists[i].description);
+            printf("\nRate: %.1f", lists[i].rate);
+            printf("\nAddress: %s", lists[i].address);
+            printf("\n================================\n");
+        }
+    }
+    if(key == 0){
+        printf("\nKhong tim thay nha hang phu hop.");
+    }
+}
+void sap_xep(NhaHang lists[], int count){
+    for(int i = 0; i < count - 1; i++){
+        for(int j = 0; j < count; j++){
+            if(lists[i].rate > lists[j].rate){
+                NhaHang c;
+                c = lists[i];
+                lists[i] = lists[j];
+                lists[j] = c;
+            }
+        }
+    }
+    for(int k = 0; k < count; k++){
+        printf("\nNha hang so %d", k + 1);
+        printf("\nName: %s", lists[k].name);
+        printf("\nDescription: %s", lists[k].description);
+        printf("\nRate: %.1f", lists[k].rate);
+        printf("\nAddress: %s", lists[k].address);
+    }
+}
+int main(){
+    NhaHang lists[200];
+    int count = 0;
+    int select;
+    int n;
+
+    do{
+        menu();
+        printf("\nHay nhap lua chon: ");
+        scanf("%d", &select);
+        switch(select){
+
+        case 1:
+                printf("\nHay nhap so luong nha hang: ");
+                scanf("%d", &n);
+                do{
+                    if(n < 1){
+                        printf("So luong phai lon hon 0. Xin hay nhap lai: ");
+                        scanf("%d", &n);
+                    }else{
+                        nhap_thong_tin(lists, &count, n);
+                    }
+                }while(n < 1);
+                break;
+        case 2:
+                in_thong_tin(lists, count);
+                break;
+        case 3:
+                tim_kiem_theo_ten(lists, count);
+                break;
+        case 4:
+                tim_kiem_theo_mo_ta(lists, count);
+                break;
+        case 5:
+                sap_xep(lists, count);
+                break;
+        case 6:
+            return 0;
+        default:
+            printf("\nHay nhap lai. Select: 1 - 5");
+        }
+    }while(69);
+
+return 0;
+}
