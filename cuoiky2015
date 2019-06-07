@@ -1,0 +1,121 @@
+#include<stdio.h>
+#include<string.h>
+void menu(){
+    printf("\n1. Bo sung sinh vien.");
+    printf("\n2. Danh sach sinh vien bao ve thanh cong.");
+    printf("\n3. Sap xep theo ten.");
+    printf("\n4. Thoat chuong trinh.");
+}
+struct sinhvien{
+    char id[10];
+    char name[30];
+    float diem_HD;
+    float diem_PB;
+    float diem_HD_1;
+    float diem_HD_2;
+    float diem_HD_3;
+};
+typedef struct sinhvien SinhVien;
+void bo_sung_sinh_vien(SinhVien lists[], int *count, int n){
+    for(int i = 0; i < n; i++){
+        printf("Nhap sinh vien: \n");
+        while(getchar() != '\n');
+        printf("Id: ");
+        gets(lists[*count].id);
+        printf("Name: ");
+        gets(lists[*count].name);
+        printf("Diem HD: ");
+        scanf("%f", &lists[*count].diem_HD);
+        printf("Diem PB: ");
+        scanf("%f", &lists[*count].diem_PB);
+        printf("Diem HD 1: ");
+        scanf("%f", &lists[*count].diem_HD_1);
+        printf("Diem HD 2: ");
+        scanf("%f", &lists[*count].diem_HD_2);
+        printf("Diem HD 2: ");
+        scanf("%f", &lists[*count].diem_HD_3);
+        *count += 1;
+    }
+}
+float diem_GK(float x, float y, float a, float b, float c){
+    float diem = (x + y) / 2;
+    if(x < 5.5 || y < 5.5 || a < 5.5 || b < 5.5 || c < 5.5 ){
+        diem = 0;
+    }
+    return diem;
+}
+float diem_CK(float a,  float b, float c, float x, float y){
+    float diem = (a + b+ c) / 3;
+    if(x < 5.5 || y < 5.5 || a < 5.5 || b < 5.5 || c < 5.5 ){
+        diem = 0;
+    }
+    return diem;
+}
+void in_thong_tin(SinhVien lists[], int count){
+    printf("%-10s%-25s%-10s%-10s%-10s%-10s%-10s%-10s%-10s", "MSSV", "Ho va ten", "HD", "PB", "HD1", "HD2", "HD3", "GiuaKy", "CuoiKy\n");
+    for(int i = 0; i < count; i++){
+        printf("\n%-10s", lists[i].id);
+        printf("%-25s", lists[i].name);
+        printf("%-10.1f", lists[i].diem_HD);
+        printf("%-10.1f", lists[i].diem_PB);
+        printf("%-10.1f", lists[i].diem_HD_1);
+        printf("%-10.1f", lists[i].diem_HD_2);
+        printf("%-10.1f", lists[i].diem_HD_3);
+        printf("%-10.1f", diem_GK(lists[i].diem_HD, lists[i].diem_PB, lists[i].diem_HD_1, lists[i].diem_HD_2, lists[i].diem_HD_3));
+        printf("%-10.1f", diem_CK(lists[i].diem_HD_1, lists[i].diem_HD_2, lists[i].diem_HD_3, lists[i].diem_HD, lists[i].diem_PB));
+    }
+}
+void sanh_sach_thanh_cong(SinhVien lists[], int count){
+    printf("%-10s%-25s%-10s%-10s%-10s%-10s%-10s%-10s%-10s", "MSSV", "Ho va ten", "HD", "PB", "HD1", "HD2", "HD3", "GiuaKy", "CuoiKy\n");
+        for(int i = 0; i < count; i++){
+            if(diem_GK(lists[i].diem_HD, lists[i].diem_PB, lists[i].diem_HD_1, lists[i].diem_HD_2, lists[i].diem_HD_3) > 5 && diem_CK(lists[i].diem_HD_1, lists[i].diem_HD_2, lists[i].diem_HD_3, lists[i].diem_HD, lists[i].diem_PB) > 5){
+                printf("\n%-10s", lists[i].id);
+                printf("%-25s", lists[i].name);
+                printf("%-10.1f", lists[i].diem_HD);
+                printf("%-10.1f", lists[i].diem_PB);
+                printf("%-10.1f", lists[i].diem_HD_1);
+                printf("%-10.1f", lists[i].diem_HD_2);
+                printf("%-10.1f", lists[i].diem_HD_3);
+                printf("%-10.1f", diem_GK(lists[i].diem_HD, lists[i].diem_PB, lists[i].diem_HD_1, lists[i].diem_HD_2, lists[i].diem_HD_3));
+                printf("%-10.1f", diem_CK(lists[i].diem_HD_1, lists[i].diem_HD_2, lists[i].diem_HD_3, lists[i].diem_HD, lists[i].diem_PB));
+            }
+    }
+}
+int main(){
+    SinhVien lists[20];
+    int select;
+    int count = 0;
+    int so_luong;
+    do{
+        menu();
+        printf("\nHay nhap lua chon: ");
+        scanf("%d", &select);
+
+        switch(select){
+            case 1:
+                do{
+                    printf("\nHay nhap so luong sinh vien: ");
+                    scanf("%d", &so_luong);
+                    if(count + so_luong > 20){
+                        printf("\nQua gioi han, hay nhap lai: ");
+                        scanf("%d", &so_luong);
+                    }else{
+                        bo_sung_sinh_vien(lists, &count, so_luong);
+                    }
+                }while(count + so_luong > 20);
+                in_thong_tin(lists, count);
+                break;
+            case 2:
+                sanh_sach_thanh_cong(lists, count);
+                break;
+            case 3:
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("\nBan nhap sai. (1-4)");
+
+        }
+    }while(69);
+return 0;
+}
