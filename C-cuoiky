@@ -1,0 +1,163 @@
+#include<stdio.h>
+#include<string.h>
+struct sinhvien{
+    int classId;
+    int day;
+    char courseName[30];
+    char room[10];
+    char slots[10];
+};
+
+void menu(){
+    printf("\n1. Them lop.");
+    printf("\n2. In thong tin lop.");
+    printf("\n3. Tim kiem theo phong.");
+    printf("\n4. Sap xep.");
+    printf("\n5. Kiem tra trung phong.");
+    printf("\n6. Thoat chuong trinh.");
+}
+typedef struct sinhvien SinhVien;
+
+void them_lop(SinhVien lists[], int *count, int n){
+    for(int i = 0; i < n; i++){
+    printf("\nNhap thong tin.\n");
+    while(getchar()!='\n');
+    printf("CourseName:");
+    do{
+        gets(lists[*count].courseName);
+        if(strlen(lists[*count].courseName) > 30){
+            printf("\nKhong duoc vuot qua 30 ky tu, hay nhap lai:");
+        }
+    }while(strlen(lists[*count].courseName) > 30);
+    printf("Room: ");
+    do{
+        gets(lists[*count].room);
+        if(strlen(lists[*count].room) > 10){
+            printf("\nKhong duoc vuot qua 10 ky tu, hay nhap lai:");
+        }
+    }while(strlen(lists[*count].room) > 10);
+    printf("Slots: ");
+    do{
+        gets(lists[*count].slots);
+        if(strlen(lists[*count].slots) > 10){
+            printf("\nKhong duoc vuot qua 10 ky tu, hay nhap lai:");
+        }
+        strstr(lists[*count].slots)
+    }while(strlen(lists[*count].slots) > 10);
+    printf("ClassId: ");scanf("%d", &lists[*count].classId);
+    do{
+         printf("Day:");scanf("%d", &lists[*count].day);
+         if(lists[*count].day > 7 || lists[*count].day < 2){
+            printf("Hay nhap lai:\n");
+         }
+    }while(lists[*count].day > 7 || lists[*count].day < 2);
+    *count += 1;
+    }
+}
+
+void in_thong_tin(SinhVien lists[], int count){
+    for(int i = 0; i< count; i++){
+    printf("%-10d",lists[i].classId);
+    printf("%-20s", lists[i].courseName);
+    printf("%-10s", lists[i].room);
+    printf("%-10s", lists[i].slots);
+    printf("%-10d\n", lists[i].day);
+    }
+}
+
+void tim_phong(SinhVien lists[], int count){
+    printf("\nHay nhap ten phong: ");
+    char room[10];
+    int key = 0;
+    while(getchar() != '\n');
+    gets(room);
+    for(int i = 0; i <= count; i++){
+        int x = strcmp(room, lists[i].room);
+        if(x == 0){
+            key++;
+            if(key == 1){
+                printf("%-10s%-20s%-10s%-10s%-10s\n", "ClassID" ,"CourseName", "Room", "Slots", "Day");
+            }
+            printf("%-10d",lists[i].classId);
+            printf("%-20s", lists[i].courseName);
+            printf("%-10s", lists[i].room);
+            printf("%-10s", lists[i].slots);
+            printf("%-10d\n", lists[i].day);
+
+        }
+    }
+    if(key == 0){
+        printf("\nKhong ton tai phong");
+    }else{
+        printf("So lop hoc: %d", key);
+    }
+}
+
+int main(){
+    SinhVien lists[200];
+    int count = 0;
+    int select;
+    do{
+        menu();
+        printf("\nHay lua chon: ");
+        scanf("%d", &select);
+        switch(select){
+        case 1:
+            {
+            int n;
+            printf("\nSo luong lop can nhap: ");
+            scanf("%d", &n);
+            do{
+                if(n + count > 200){
+                printf("\nSo lop vuot qua gioi han, hay nhap lai :");
+                scanf("%d", &n);
+                }
+                if(n < 1){
+                printf("\nSo lop phai lon hon 0, hay nhap lai :");
+                scanf("%d", &n);
+                }
+            }while(n + count > 200 || n < 1);
+
+            fflush(stdin);
+            them_lop(lists, &count, n);
+            }
+            break;
+        case 2:
+            {
+                printf("%-10s%-20s%-10s%-10s%-10s\n", "ClassID" ,"CourseName", "Room", "Slots", "Day");
+                in_thong_tin(lists, count);
+            }
+            break;
+
+        case 3:
+            {
+                tim_phong(lists, count);
+            }
+            break;
+        case 4:
+            {
+                for(int i = 0; i < count ; i++){
+                    for(int j = 0; j < count + 1;j++){
+                        if(lists[i].classId < lists[j].classId){
+                            SinhVien changeClass;
+                            changeClass = lists[i];
+                            lists[i] = lists[j];
+                            lists[j] = changeClass;
+                        }
+                    }
+                }
+            }
+            in_thong_tin(lists, count);
+            break;
+        case 5: break;
+
+        case 6: return 0;
+
+        default:
+            {
+                printf("Nhap sai (Lua chon : 1- 6)\n");
+            }
+        }
+    }while(44);
+return 0;
+}
